@@ -260,7 +260,7 @@ func wrapRoute(route Route) Middleware {
 				// the request and trigger the error handling chain
 				return err
 			}
-			if !matches {
+			if (!(route.Terminal && req.Method == "CONNECT")) && !matches {
 				// call the next handler, and skip this one,
 				// since the matcher didn't match
 				return nextCopy.ServeHTTP(rw, req)
